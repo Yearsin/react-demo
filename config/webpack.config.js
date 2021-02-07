@@ -407,7 +407,6 @@ module.exports = function (webpackEnv) {
                     },
                   ],
                 ],
-                
                 plugins: [
                   [
                     require.resolve('babel-plugin-named-asset-import'),
@@ -420,6 +419,7 @@ module.exports = function (webpackEnv) {
                       },
                     },
                   ],
+                  [require.resolve('babel-plugin-import'), { libraryName: 'antd', style: 'css' }],
                   isEnvDevelopment &&
                     shouldUseReactRefresh &&
                     require.resolve('react-refresh/babel'),
