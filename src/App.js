@@ -1,29 +1,29 @@
 import React from 'react';
+import { BrowserRouter, Switch, Route, Link } from 'react-router-dom'
 import { Button } from 'antd';
-import logo from './logo.svg';
 import './App.css';
 import './styles/app.scss';
+import Home from './pages/home'
+import Login from './pages/login'
+import NotFound from './pages/not-found'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p className="">
-          Edit <code className="jm-tips">src/App.js</code> and save to reload.
-        </p>
-        <Button type="primary">Button</Button>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+    render() {
+        return (
+            <BrowserRouter>
+                <ul>
+                    <li><Link to="/home">Home</Link></li>
+                    <li><Link to="/login">Login</Link></li>
+                </ul>
+                <Switch>
+                    <Route exact path="/" component={Home} />
+                    <Route path="/home" component={Home} />
+                    <Route path="/login" component={Login} />
+                    <Route component={NotFound} />
+                </Switch>
+            </BrowserRouter>
+        );
+    }
 }
 
 export default App;

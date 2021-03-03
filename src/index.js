@@ -6,11 +6,12 @@ import {Get, Post, Put, _Delete} from './config/axios';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import Router from './router/index.js';
+// import { BrowserRouter, Link } from "react-router-dom";
+// import Router from './router/index.js';
 
-export default function Index() {
-  return <Router />;
-}
+// export default function Index() {
+//   return <Router />;
+// }
 
 // 全局Axios请求、Api地址
 Component.prototype.$api = api;
@@ -33,12 +34,17 @@ Component.prototype.$delete = _Delete;
 //   }
 // }
 // ReactDOM.render(<Hello />, document.getElementById('root'));
-{/* <App /> */}
+
 ReactDOM.render(
-  <React.StrictMode>
-  </React.StrictMode>,
-  document.getElementById('root')
+    <App />,
+    document.getElementById('root')
 );
+
+// ReactDOM.render(
+//   <React.StrictMode>
+//   </React.StrictMode>,
+//   document.getElementById('root')
+// );
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
