@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Routes from './router';
 import ReactDOM from 'react-dom';
 // import antdUi from './config/antd-ui';
 import api from './config/api';
@@ -8,7 +9,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 // import { BrowserRouter, Link } from "react-router-dom";
 // import Router from './router/index.js';
-
+console.log(Routes, 'Routes');
 // export default function Index() {
 //   return <Router />;
 // }

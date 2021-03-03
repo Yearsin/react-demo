@@ -1,16 +1,29 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
-import asyncComponent from '../utils/asyncComponent';
+import loadable from '../utils/loadable'
+const Home = loadable(() => import('../components/home'))
+const Login = loadable(() => import('../components/login'))
 
-const Home = asyncComponent(() => import('../pages/home'));
+const routes = [
+    // 菜单相关路由
+    {
+        path: '/index',
+        title: '首页',
+        icon: 'mobile',
+        component: Home,
+        isTab: false
+    },
+    {
+        path: '/login',
+        title: '登录',
+        component: Login,
+        isTab: false
+    },
+    {
+        path: '/index/ui',
+        title: '二级',
+        icon: 'scan',
+        isTab: false,
+        children: []
+    }
+];
 
-export default function () {
-    return (
-        <Router>
-            <Switch>
-                <Route path='/home' component={Home} />
-                {/* <Redirect from='/' to='/home'></Redirect> */}
-            </Switch>
-        </Router>
-    );
-}
+export default routes;
