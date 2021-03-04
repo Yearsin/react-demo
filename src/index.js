@@ -34,6 +34,7 @@ Component.prototype.$delete = _Delete;
 //       )
 //   }
 // }
+
 // ReactDOM.render(<Hello />, document.getElementById('root'));
 
 ReactDOM.render(
