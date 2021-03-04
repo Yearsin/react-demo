@@ -18,6 +18,7 @@ class Home extends Component {
         return (
             <div>
                 <h1>Home页面</h1>
+                <input type="text"/>
             </div>
         );
     }
