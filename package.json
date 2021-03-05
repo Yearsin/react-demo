@@ -78,8 +78,11 @@
   },
   "scripts": {
     "start": "node scripts/start.js",
-    "build": "node scripts/build.js",
-    "test": "node scripts/test.js"
+    "build": "node --max_old_space_size=4096 scripts/build.js",
+    "test": "node scripts/test.js",
+    "build:dev": "dotenv -e .env.development node --max_old_space_size=4096 scripts/build.js",
+    "build:test": "dotenv -e .env.test node --max_old_space_size=4096 scripts/build.js",
+    "build:prod": "dotenv -e .env.production node --max_old_space_size=4096 scripts/build.js"
   },
   "eslintConfig": {
     "extends": [
@@ -158,6 +161,7 @@
   },
   "devDependencies": {
     "babel-plugin-import": "^1.13.3",
+    "dotenv-cli": "^4.0.0",
     "node-sass": "^5.0.0",
     "sass-loader": "^10.1.1",
     "sass-resources-loader": "^2.1.1"
