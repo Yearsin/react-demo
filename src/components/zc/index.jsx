@@ -17,7 +17,7 @@ class Home extends Component {
     render() {
         return (
             <div>
-                <h1>Home页面</h1>
+                <h1>整车发货</h1>
                 <input type="text"/>
             </div>
         );
