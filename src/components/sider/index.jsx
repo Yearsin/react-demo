@@ -1,15 +1,16 @@
 import React from "react"
-import { BrowserRouter, Switch, Route, Link, NavLink, Redirect } from 'react-router-dom'
 import { Layout, Menu } from 'antd'
 import Routers from '../../router'
+import store from '../../store'
 
-const { Header, Content, Sider } = Layout;
+const { Sider } = Layout;
 const { SubMenu } = Menu;
 
 class JmSider extends React.Component {
     constructor (props) {
         super(props);
         this.state = {
+            activeKey: [],
             menus: [
                 {
                     children: [
@@ -27,17 +28,20 @@ class JmSider extends React.Component {
                 }
             ]
         };
+        store.subscribe(() => {
+            this.setState({
+                activeKey: [String(store.getState().activeKey)]
+            });
+        });
     }
     handleSelect = e => {
-        let indexs = e.key.split('-');
-        let name = this.state.menus[indexs[0] - 1].children[indexs[1] - 1].router;
         // 获取router规则数据 匹配上后 获取组件也就是 component 后给 tabs 赋值
-        console.log(name);
-        console.log(Routers);
-        // this.$router.push({
-        //     name,
-        //     query: {menuIndex: e}
-        // });
+        let currentRoute;
+        Routers.map(route => route.name === e.key && (currentRoute = route));
+        let list = store.getState().pages.filter(item => item.name === currentRoute.name);
+        // 在tabs中没有
+        !list.length && store.getState().pages.push(currentRoute);
+        store.dispatch({type: "PAGES_ADD", pages: store.getState().pages, activeKey: currentRoute.name})
     }
     render () {
         return (
@@ -46,12 +50,13 @@ class JmSider extends React.Component {
                 <Menu
                 mode="inline"
                 theme="dark"
+                selectedKeys={this.state.activeKey}
                 onSelect={this.handleSelect}
                 >
                     {this.state.menus.map((item, index) => (
                         <SubMenu key={String(index + 1)} title={item.parent}>
-                            {item.children.map((childItem, childIndex) => (
-                                <Menu.Item key={(index + 1) + '-' + (childIndex + 1)} data-url={item.router} >
+                            {item.children.map(childItem => (
+                                <Menu.Item key={childItem.router} data-index={String(index + 1)}>
                                     {childItem.name}
                                 </Menu.Item>
                             ))}

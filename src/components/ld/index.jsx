@@ -9,7 +9,6 @@ class Home extends Component {
         this.home()
     }
     home = () => {
-        console.log(this.$api.basic);
         // this.get(`${this.api.home}`, '').then( res => {
         //     console.log(res)
         // })

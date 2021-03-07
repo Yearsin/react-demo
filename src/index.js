@@ -1,18 +1,15 @@
 import React, { Component } from 'react';
-import Routes from './router';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux'
+import store from './store'
+import {persistor} from './store'
+import {PersistGate} from 'redux-persist/lib/integration/react';
 // import antdUi from './config/antd-ui';
 import api from './config/api';
 import {Get, Post, Put, _Delete} from './config/axios';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-// import { BrowserRouter, Link } from "react-router-dom";
-// import Router from './router/index.js';
-console.log(Routes, 'Routes');
-// export default function Index() {
-//   return <Router />;
-// }
 
 // 全局Axios请求、Api地址
 Component.prototype.$api = api;
@@ -20,35 +17,14 @@ Component.prototype.$post = Post;
 Component.prototype.$get = Get;
 Component.prototype.$put = Put;
 Component.prototype.$delete = _Delete;
-// export default class Hello extends Component{
-//   render(){
-//       return (
-//           <Router>
-//               <div>
-//                   <ul className="nav">
-//           　　　　　　<li><Link to="/">App</Link></li>
-//           　　　　　　<li><Link to="/home">home</Link></li>
-//       　　 　　　　</ul>
-//               </div>
-//           </Router>
-//       )
-//   }
-// }
-
-// ReactDOM.render(<Hello />, document.getElementById('root'));
 
 ReactDOM.render(
-    <App />,
+    <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+            <App />
+        </PersistGate>
+    </Provider>,
     document.getElementById('root')
 );
 
-// ReactDOM.render(
-//   <React.StrictMode>
-//   </React.StrictMode>,
-//   document.getElementById('root')
-// );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
