@@ -9,35 +9,33 @@ class JmTabs extends React.Component {
     constructor (props) {
         super(props);
         // 当页面刷新 panes 为空时 读取本地数据遍历路由规则 重新组装
-        // let action = store.getState().action;
-        // let arr = [];
-        // if (action) {
-        //     Routers.map(route => {
-        //         action.pages.map(item => {
-        //             if (route.name === item.name) {
-        //                 arr.push(route);
-        //             }
-        //         })
-        //     })
-        //     // this.setState({panes: arr})
-        //     // store.dispatch({type: "PAGES_ADD", pages: arr, activeKey: action.activeKey});
-        // }
-        // const panes = store.getState().pages.length ? store.getState().pages : JSON.parse(localStorage.getItem('pages'));
-        const panes = store.getState().pages // store.getState().pages.length ? store.getState().pages : arr;
+        const panes = store.getState().action.pages // store.getState().pages.length ? store.getState().pages : arr;
         const activeKey = store.getState().activeKey;
         this.state = {
             activeKey: activeKey,
-            panes
+            panes,
+            storePages: Routers.filter(item => item.name === activeKey)[0]
         };
+        // console.log(activeKey)
+        // console.log(store.getState().action);
+        // console.log(Routers);
+        // Routers.forEach(item => {
+        //     if (item.name === activeKey) {
+        //         this.setState({storePages: item});
+        //         // console.log(this.state.storePages, 'storePages');
+        //         console.log(item, 'item');
+        //     }
+        // });
         store.subscribe(() => {
             this.setState({
-                panes: store.getState().pages, // store.getState().pages.length ? store.getState().pages : arr,
+                panes: store.getState().action.pages, // store.getState().pages.length ? store.getState().pages : arr,
                 activeKey: store.getState().activeKey
             });
         });
     }
     onChange = activeKey => {
-        this.setState({ activeKey });
+        this.setState({ activeKey, storePages: Routers.filter(item => item.name === activeKey)[0] });
+        console.log(activeKey)
         store.dispatch({type: "PAGES_ADD", pages: store.getState().pages, activeKey: activeKey});
     };
     onEdit = (targetKey, action) => {
@@ -72,7 +70,8 @@ class JmTabs extends React.Component {
                     padding: '10px'
                     }}
                 >
-                {pane ? pane.content : null}
+                { this.state.storePages.content }
+                {/* {pane ? (pane.content ? pane.content : this.state.storePages.content) : null} */}
                 </TabPane>
             ))}
             </Tabs>

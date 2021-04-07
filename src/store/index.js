@@ -6,9 +6,7 @@ import reducer from "./reducer";
 
 const persistConfig = {
     key: 'root',
-    storage: storage,
-    // blacklist: ['pages'],
-    whitelist: ['pages', 'activeKey']
+    storage: storage
 };
 // const myPersistReducer = persistReducer(persistConfig, reducer)
 
@@ -21,17 +19,17 @@ const persistConfig = {
 const composeEnhancers =
   window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
   window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({}) : compose;
- 
+
 const enhancer = composeEnhancers(
   applyMiddleware(thunk)
 );
- 
+
 const myReducer = persistReducer({
     key: 'root',
     storage
 }, reducer);
- 
+
 const store = createStore(myReducer, enhancer);
- 
+
 export const persistor = persistStore(store);
 export default store;
