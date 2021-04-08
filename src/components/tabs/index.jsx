@@ -23,9 +23,7 @@ class JmTabs extends React.Component {
         const activeKey = store.getState().activeKey;
         this.state = {
             activeKey: activeKey,
-            panes,
-            pageEnum: {},
-            storePages: Routers.filter(item => item.name === activeKey)[0]
+            panes
         };
         store.subscribe(() => {
             this.setState({
@@ -35,8 +33,7 @@ class JmTabs extends React.Component {
         });
     }
     onChange = activeKey => {
-        console.log(activeKey);
-        this.setState({ activeKey, storePages: Routers.filter(item => item.name === activeKey)[0] });
+        this.setState({ activeKey });
         store.dispatch({type: "PAGES_ADD", pages: store.getState().pages, activeKey: activeKey});
     };
     onEdit = (targetKey, action) => {
@@ -71,8 +68,6 @@ class JmTabs extends React.Component {
                     }}
                 >
                 <ToTabContent name={pane.name} />
-                {/* { this.state.storePages.content } */}
-                {/* {pane ? (pane.content ? pane.content : this.state.storePages.content) : null} */}
                 </TabPane>
             ))}
             </Tabs>

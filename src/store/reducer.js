@@ -14,6 +14,13 @@ export default (state = defaultState, action) => {
             newState.action = action;
             return newState;
             break;
+        // case "SELECT_PAGES":
+        //     let newState = { ...state };
+        //     newState.pages = action.pages;
+        //     newState.activeKey = action.activeKey;
+        //     newState.action = action;
+        //     return newState;
+        //     break;
         case "INIT_PAGE":
             let state2 = { ...state };
             state2.pageEnum = action.pageEnum;
