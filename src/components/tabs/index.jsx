@@ -5,6 +5,17 @@ import store from '../../store'
 
 const { TabPane } = Tabs;
 
+// class ToTabContent extends React.Component {
+//     constructor (props) {
+//         super(props)
+//     }
+//     render() {
+//         //通过传入的name属性动态得到自己需要注入的组件，MyComponent首字母要大写
+//         // const MyComponent = pages[this.props.name]
+//         console.log(this.props.name);
+//         return <MyComponent {...this.props} />
+//     }
+// }
 class JmTabs extends React.Component {
     constructor (props) {
         super(props);
@@ -16,6 +27,7 @@ class JmTabs extends React.Component {
             panes,
             storePages: Routers.filter(item => item.name === activeKey)[0]
         };
+        // console.log(store.getState().action);
         // console.log(activeKey)
         // console.log(store.getState().action);
         // console.log(Routers);
@@ -26,6 +38,7 @@ class JmTabs extends React.Component {
         //         console.log(item, 'item');
         //     }
         // });
+        console.log(Routers[0], 'Routers');
         store.subscribe(() => {
             this.setState({
                 panes: store.getState().action.pages, // store.getState().pages.length ? store.getState().pages : arr,
@@ -61,15 +74,16 @@ class JmTabs extends React.Component {
             >
             {this.state.panes.map(pane => (
                 <TabPane
-                    tab={pane.title}
                     key={pane.name}
                     data-url={pane.name}
+                    tab={pane.title}
                     style={{
                     minHeight: 280,
                     backgroundColor: '#fff',
                     padding: '10px'
                     }}
                 >
+                {/* <ToTabContent name={pane.name} /> */}
                 { this.state.storePages.content }
                 {/* {pane ? (pane.content ? pane.content : this.state.storePages.content) : null} */}
                 </TabPane>
