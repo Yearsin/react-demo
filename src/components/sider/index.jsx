@@ -36,12 +36,16 @@ class JmSider extends React.Component {
     }
     handleSelect = e => {
         // 获取router规则数据 匹配上后 获取组件也就是 component 后给 tabs 赋值
-        let currentRoute;
-        Routers.map(route => route.name === e.key && (currentRoute = route));
-        let list = store.getState().pages.filter(item => item.name === currentRoute.name);
+        let route;
+        Routers.map(item => item.name === e.key && (route = item));
+        // if (store.getState().action) {
+        let list = store.getState().action ? store.getState().action.pages.filter(item => item.name === route.name) : [];
         // 在tabs中没有
-        !list.length && store.getState().pages.push(currentRoute);
-        store.dispatch({type: "PAGES_ADD", pages: store.getState().pages, activeKey: currentRoute.name})
+        // console.log(list)
+        !list.length && store.getState().action.pages.push({name: route.name, title: route.title});
+        // // console.log(route.name, store.getState().pageEnum);
+        store.dispatch({type: "PAGES_ADD", pages: store.getState().action.pages, activeKey: route.name})
+        // }
     }
     render () {
         return (

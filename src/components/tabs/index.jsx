@@ -19,7 +19,8 @@ class JmTabs extends React.Component {
     constructor (props) {
         super(props);
         // 当页面刷新 panes 为空时 读取本地数据遍历路由规则 重新组装
-        const panes = store.getState().action ? store.getState().action.pages : [] // store.getState().pages.length ? store.getState().pages : arr;
+        console.log(store.getState());
+        const panes = store.getState().action ? store.getState().action.pages : [];
         const activeKey = store.getState().activeKey;
         this.state = {
             activeKey: activeKey,
@@ -34,16 +35,19 @@ class JmTabs extends React.Component {
     }
     onChange = activeKey => {
         this.setState({ activeKey });
-        store.dispatch({type: "PAGES_ADD", pages: store.getState().pages, activeKey: activeKey});
+        store.dispatch({type: "PAGES_ADD", pages: store.getState().action.pages, activeKey: activeKey});
     };
     onEdit = (targetKey, action) => {
         this[action](targetKey);
     };
     remove = targetKey => {
         let { activeKey } = this.state;
+        // console.log(targetKey);
         const panes = this.state.panes.filter(pane => pane.name !== targetKey);
+        // console.log(panes);
         panes.length && (activeKey = panes[panes.length - 1 > 0 ? panes.length - 1 : 0].name);
         store.dispatch({type: "PAGES_ADD", pages: panes, activeKey: activeKey})
+        console.log(panes, activeKey);
     };
     render () {
         return (
