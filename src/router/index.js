@@ -1,8 +1,4 @@
 import loadable from '../utils/loadable'
-// import Zc from '../components/zc'
-// import Ld from '../components/ld'
-// import ZcOrder from '../components/zc-order'
-// import LdOrder from '../components/ld-order'
 const Zc = loadable(() => import('../components/zc'))
 const Ld = loadable(() => import('../components/ld'))
 const ZcOrder = loadable(() => import('../components/zc-order'))

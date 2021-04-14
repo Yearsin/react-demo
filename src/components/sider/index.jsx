@@ -1,4 +1,6 @@
 import React from "react"
+// import { Router, Route, Link } from 'react-router'
+import { Link } from 'react-router-dom'
 import { Layout, Menu } from 'antd'
 import Routers from '../../router'
 import store from '../../store'
@@ -14,15 +16,15 @@ class JmSider extends React.Component {
             menus: [
                 {
                     children: [
-                        {name: "整车发货", router: "zc"},
-                        {name: "零担发货", router: "ld"}
+                        {name: "整车发货", router: "zc", path: '/zc'},
+                        {name: "零担发货", router: "ld", path: '/ld'}
                     ],
                     parent: "货源管理"
                 },
                 {
                     children: [
-                        {name: "整车订单", router: "zcOrder"},
-                        {name: "零担订单", router: "ldOrder"}
+                        {name: "整车订单", router: "zcOrder", path: '/zcOrder'},
+                        {name: "零担订单", router: "ldOrder", path: '/ldOrder'}
                     ],
                     parent: "订单管理"
                 }
@@ -61,7 +63,8 @@ class JmSider extends React.Component {
                         <SubMenu key={String(index + 1)} title={item.parent}>
                             {item.children.map(childItem => (
                                 <Menu.Item key={childItem.router} data-index={String(index + 1)}>
-                                    {childItem.name}
+                                    {/* {childItem.name} */}
+                                    <Link to={{pathname: childItem.path}}>{childItem.name}</Link>
                                 </Menu.Item>
                             ))}
                         </SubMenu>

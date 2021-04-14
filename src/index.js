@@ -7,7 +7,6 @@ import {PersistGate} from 'redux-persist/lib/integration/react';
 // import antdUi from './config/antd-ui';
 import api from './config/api';
 import {Get, Post, Put, _Delete} from './config/axios';
-import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 

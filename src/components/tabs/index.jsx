@@ -1,5 +1,6 @@
 import React from "react"
 import { Layout, Tabs } from 'antd'
+import { Link } from 'react-router-dom'
 import Routers from '../../router'
 import store from '../../store'
 
@@ -71,7 +72,9 @@ class JmTabs extends React.Component {
                     padding: '10px'
                     }}
                 >
-                <ToTabContent name={pane.name} />
+                    {/* {pane.name} */}
+                    <ToTabContent name={pane.name} />
+                    {/* <Link to={{pathname: pane.path}}><ToTabContent name={pane.name} /></Link> */}
                 </TabPane>
             ))}
             </Tabs>
